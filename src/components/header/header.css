@@ -1,0 +1,41 @@
+.header{
+    margin-top: 60px;
+}
+
+.headerItems{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Noto Sans Chakma', sans-serif;
+    color: #0a70b4;
+}
+
+.headerItemSmall{
+    position: absolute;
+    top: 10%;
+    font-size: 25px;
+    color:  #0a70b8;
+}
+
+.headerItemBig{
+    position: absolute;
+    top: 10%;
+    font-size: 100px;
+    color: ;
+    background: padding-box;
+}
+
+
+
+.headerImage{
+    width:100%;
+    height: 450px;
+    margin-top:80px;
+    object-fit: cover;
+}
+
+.bitImageLogo{
+    width: 200px; /* Ajuste o tamanho conforme necessário */
+    height: 100px; /* Ajuste o tamanho conforme necessário */
+    
+  }
