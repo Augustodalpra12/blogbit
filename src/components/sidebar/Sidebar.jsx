@@ -1,6 +1,16 @@
 import "./sidebar.css"
+import React, { useEffect, useState } from "react";
+
 
 export default function Sidebar() {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/categories')
+        .then(res => res.json())
+        .then(data => setCategories(data))
+    })
+
   return (
     <div className="sidebar">
         <div className="sidebarItem">
@@ -10,10 +20,9 @@ export default function Sidebar() {
         <div className="sidebarItem">
         <span className="sidebarTitle">Categorias</span>
         <ul className="sidebarList">
-            <li className="sidebarListItem">WEB</li>
-            <li className="sidebarListItem">DESKTOP</li>
-            <li className="sidebarListItem">DISPOSITIVOS MOVEIS</li>
-            <li className="sidebarListItem">EMBARCADOS</li>
+            {categories.map((category) => {
+                return <li className="sidebarListItem">{category}</li>
+            })}
         </ul>
         </div>
     </div>

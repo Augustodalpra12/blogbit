@@ -10,6 +10,8 @@ function App() {
     <Router>
       <Routes>
       <Route path="/" exact element={<Home></Home>}></Route>
+      <Route path="/category/:category" exact element={<Home></Home>}></Route>
+      
       <Route path="/admin" exact element={<HomeAdmin></HomeAdmin>}></Route>
       <Route path="/admin/novo-post" exact element={<NewPost></NewPost>}></Route>
       <Route path="/admin/post/:postId" exact element={<SingleAdmin></SingleAdmin>}></Route>

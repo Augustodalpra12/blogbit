@@ -21,7 +21,6 @@ export default function SinglePost(props) {
         <img className="singlePostImage" src={post.image} alt="" />
         <h1 className="singlePostTitle">{post.name}</h1>
         <div className="singlePostInfo">
-            <span className="singlePostCriador">Criador: <b>Nome</b></span>
             <span className="singlePostDate">{new Date(post.date).toLocaleString()}</span>
         </div>
         <p className="singlePostDescription">{post.content}</p>

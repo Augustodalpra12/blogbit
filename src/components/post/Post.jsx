@@ -10,7 +10,9 @@ export default function Post(props) {
       <img className="postImg" src={props.image} alt="" />
       <div className="postInfo">
         <div className="postCategories">
-          <span className="postCategories">{props.category}</span>
+          <span className="postCategories" onClick={() => {
+              window.location.href=`/category/${props.category}`
+          }}>{props.category}</span>
         </div>
 
         <span className="postTitle" onClick={() => {
