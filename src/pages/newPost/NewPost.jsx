@@ -7,7 +7,7 @@ export default function NewPost() {
     <NavBarAdmin/>
       <div className="newPost">
         <img className="newPostImage" src="" alt="" />
-        <form className="newPostForm">
+        <form className="newPostForm" method="post" action="/api/new-post">
           <div className="newPostFormGroup">
             <label htmlFor="fileInput">
             <i class="fileInputButton fa-solid fa-plus"></i>
