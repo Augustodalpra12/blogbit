@@ -1,21 +1,30 @@
 import NavBar from "../navbar/NavBar"
 import "./singlePost.css"
 
-export default function SinglePost() {
+import React, { useEffect, useState } from "react";
+
+export default function SinglePost(props) {
+  
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+      fetch('/api/post/' + props.id)
+      .then(res => res.json())
+      .then(data => setPost(data))
+  })
+
   return (
     <>
     <div className="singlePost">
     <NavBar/>
       <div className="singlePostWrapper">
-        <img className="singlePostImage" src="https://cdn.pixabay.com/photo/2016/11/23/14/45/coding-1853305_640.jpg" alt="" />
-        <h1 className="singlePostTitle">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit!
-        </h1>
+        <img className="singlePostImage" src={post.image} alt="" />
+        <h1 className="singlePostTitle">{post.name}</h1>
         <div className="singlePostInfo">
             <span className="singlePostCriador">Criador: <b>Nome</b></span>
-            <span className="singlePostDate">1 hora atras</span>
+            <span className="singlePostDate">{new Date(post.date).toLocaleString()}</span>
         </div>
-        <p className="singlePostDescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis iure quae placeat, velit et corrupti eius porro dolores neque distinctio perferendis ab. Eum, velit accusantium! Magni debitis quasi asperiores quam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis iure quae placeat, velit et corrupti eius porro dolores neque distinctio perferendis ab. Eum, velit accusantium! Magni debitis quasi asperiores quam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis iure quae placeat, velit et corrupti eius porro dolores neque distinctio perferendis ab. Eum, velit accusantium! Magni debitis quasi asperiores quam.</p>
+        <p className="singlePostDescription">{post.content}</p>
       </div>
     </div>
     </>

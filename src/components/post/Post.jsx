@@ -13,12 +13,14 @@ export default function Post(props) {
           <span className="postCategories">{props.category}</span>
         </div>
 
-        <span className="postTitle">{props.name}</span>
+        <span className="postTitle" onClick={() => {
+            window.location.href= `/post/${props.id}`
+        }}>{props.name}</span>
 
         <hr></hr>
-        <span className="postDate">{props.date}</span>
+        <span className="postDate">{new Date(props.date).toLocaleString()}</span>
       </div>
-      <p className="postDescription">{props.content}</p>
+      <p className="postDescription">{props.content.substring(0, 25)}...</p>
     </div>
     
 

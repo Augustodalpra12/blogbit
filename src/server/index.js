@@ -22,6 +22,15 @@ app.get('/api/posts', (req, res) => {
     })
 })
 
+app.get('/api/post/:id', (req, res) => {
+    let id = req.params.id
+    
+    read_handler.handle(id).then((result) => {
+        res.send(result)  
+    })
+})
+
+
 /*const create_handler = require('./handlers/create')(database_functions);
 app.get('/api/posts', (req, res) => {
     read_handler.handle().then((result) => {
