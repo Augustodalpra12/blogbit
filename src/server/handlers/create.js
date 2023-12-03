@@ -1,32 +1,23 @@
-module.exports = (db_funcs, fs, utils, cfg) => {
+module.exports = (db_funcs) => {
     return {
         error_enum: {
             success: 'success',
-            file_upload_failure: 'file upload failure'
+            post_already_exists: 'post already exists'
         },
 
-        handle: async function(file){
+        handle: async function(name, content, image){
             let error_enum = this.error_enum
-            
-            let real_id = utils.random_id()
 
-            let full_path = cfg.uploads_folder + real_id
+            if(db_funcs.fetch_post_with_name(name) !== null){
+                return error_enum.post_already_exists
+            }
 
-            const ws = fs.createWriteStream(full_path)
-
-            let buf = file.buffer
-
-            let hash = utils.get_md5(buf)
-
-            await db_funcs.insert_file(real_id, full_path, file.originalname, hash, file.mimetype)
-
-            ws.on('error', (err) => {
-                return error_enum.file_upload_failure
+            db_funcs.insert_post({
+                name: name,
+                content: content,
+                image: image,
+                category: 'test'
             })
-
-            ws.write(buf); 
-
-            ws.end();    
 
             return error_enum.success
         }

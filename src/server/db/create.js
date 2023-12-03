@@ -12,7 +12,7 @@ module.exports = (db) => {
         },
 
         insert_post: async function(data) {
-            await db`INSERT INTO posts (name, content, category, image, date) VALUES(${data.name}, ${data.content}, ${data.category}, ${data.image}, ${Date.now()})`
+            await db`INSERT INTO posts (name, content, category, image, date) VALUES(${data.name}, ${data.content}, ${data.category}, ${data.image}, ${Math.round(Date.now() / 1000)})`
         }
     }
 }

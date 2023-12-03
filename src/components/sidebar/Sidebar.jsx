@@ -1,6 +1,6 @@
 import "./sidebar.css"
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom"
 
 export default function Sidebar() {
     const [categories, setCategories] = useState([]);
@@ -21,7 +21,9 @@ export default function Sidebar() {
         <span className="sidebarTitle">Categorias</span>
         <ul className="sidebarList">
             {categories.map((category) => {
-                return <li className="sidebarListItem">{category}</li>
+                return <li className="sidebarListItem" onClick={() => {
+                    window.location.href = `/category/${category}`
+                }}>{category}</li>
             })}
         </ul>
         </div>

@@ -12,6 +12,18 @@ module.exports = (db) => {
             return post
         },
 
+        fetch_post_with_name: async function(name){
+            let post = await db`SELECT * FROM posts WHERE name=${name}`
+
+            if(post.length === 0){
+                return null
+            }
+
+            post = post[0]
+            
+            return post
+        },
+
         fetch_all_posts: async function(){
             return await db`SELECT * FROM posts ORDER by id`
         },
