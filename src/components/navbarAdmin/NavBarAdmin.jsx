@@ -23,8 +23,12 @@ export default function NavBarAdmin() {
 
        <div className="navRight">
 
-       <i className="navIcons fa-brands fa-instagram"></i>
+       <a href="https://www.instagram.com/bit.empresajunior/" target="_blank" rel="noopener noreferrer">
+        <i className="navIcons fa-brands fa-instagram"></i>
+       </a>
+       <a href="https://www.linkedin.com/company/bitej/?originalSubdomain=br" target="_blank" rel="noopener noreferrer">
        <i className="navIcons fa-brands fa-linkedin"></i>
+       </a>
        </div>
     </div>
   )
