@@ -7,21 +7,28 @@ export default function NavBarAdmin() {
        <div className="navLeft">
        <ul className="navList">
             <li className="navItem">
-            <Link to="/" className="link">BIT</Link>
+            <Link to="/" className="link">
+            logo
+            <img className="bitImage" src={process.env.PUBLIC_URL + '/assets/bitmini.jpg'} alt="Logo" />
+            </Link>
             </li>
+            <Link className="link" to="/categorias">
             <li className="navItem">CATEGORIAS</li>
+            </Link>
             <li className="navItem">
             <Link to="/admin/novo-post" className="link">NOVO POST</Link>
             </li>
         </ul>
        </div>
-       <div className="navCenter">
-       <i className="searchIcon fa-solid fa-magnifying-glass"></i>
-       </div>
+
        <div className="navRight">
 
-       <i className="navIcons fa-brands fa-instagram"></i>
+       <a href="https://www.instagram.com/bit.empresajunior/" target="_blank" rel="noopener noreferrer">
+        <i className="navIcons fa-brands fa-instagram"></i>
+       </a>
+       <a href="https://www.linkedin.com/company/bitej/?originalSubdomain=br" target="_blank" rel="noopener noreferrer">
        <i className="navIcons fa-brands fa-linkedin"></i>
+       </a>
        </div>
     </div>
   )

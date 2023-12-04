@@ -66,3 +66,12 @@
     color: #e5d9c6;
     cursor: pointer;
 }
+
+.bitImage {
+    width: 50px; /* Ajuste o tamanho conforme necessário */
+    height: 50px; /* Ajuste o tamanho conforme necessário */
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+  }

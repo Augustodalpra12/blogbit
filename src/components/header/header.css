@@ -7,21 +7,21 @@
     flex-direction: column;
     align-items: center;
     font-family: 'Noto Sans Chakma', sans-serif;
-    color: #444;
+    color: #0a70b4;
 }
 
 .headerItemSmall{
     position: absolute;
     top: 10%;
     font-size: 25px;
-    color: Blue;
+    color:  #0a70b8;
 }
 
 .headerItemBig{
     position: absolute;
     top: 10%;
     font-size: 100px;
-    color: Blue;
+    color: ;
     background: padding-box;
 }
 
@@ -33,3 +33,9 @@
     margin-top:80px;
     object-fit: cover;
 }
+
+.bitImageLogo{
+    width: 200px; /* Ajuste o tamanho conforme necessário */
+    height: 100px; /* Ajuste o tamanho conforme necessário */
+    
+  }
