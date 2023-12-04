@@ -35,6 +35,9 @@
     font-family: 'Noto Sans Chakma', sans-serif;
     font-size: 14px;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .sidebarListItem{
