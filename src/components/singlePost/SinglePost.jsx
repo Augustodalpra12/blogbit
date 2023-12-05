@@ -32,7 +32,11 @@ export default function SinglePost(props) {
                     fetch(`/api/post/${props.id}/delete`)
                     .then(res => res.text())
                     .then(data => {
-                        window.location.href = `/admin/?err=${data}`
+                      if(data === 'success'){
+                          window.location.href = `/admin`
+                      } else{
+                          window.location.href = `/admin/?err=${data}`
+                      }
                     })
                 }}></i>
 
