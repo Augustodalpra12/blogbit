@@ -5,8 +5,10 @@ import SearchBar from "../../components/searchbar/SearchBar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import "./categories.css"
 
+import { useParams } from "react-router"
 
 export default function Categories() {
+
   return (
     <div>
         <>
@@ -16,7 +18,7 @@ export default function Categories() {
         <SearchBar></SearchBar>
         </div>
         <div className="categories">
-        <Posts></Posts>
+        <Posts {...useParams()} ></Posts>
         <Sidebar></Sidebar>
         </div>
         

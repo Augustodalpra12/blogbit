@@ -1,31 +1,30 @@
 import "./searchBar.css"
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function SearchBar({ onSearch }) {
-    const [query, setQuery] = useState('');
-  
+import { useNavigate } from 'react-router-dom';
+
+export default function SearchBar() {
+    const navigate = useNavigate()
+
     const handleInputChange = (event) => {
-      setQuery(event.target.value);
+        const {value} = event?.target;
+        
+        navigate('/categorias/' + value, {replace: true})
     };
-  
-    const handleSearch = () => {
-      if (onSearch) {
-        onSearch(query);
-      }
-    };
+
+    const parts = window.location.pathname.split('/');
+
+    const cat = parts[parts.length - 1];
   
     return (
       <div className="search-bar-container">
         <input
           type="text"
           placeholder="Digite sua busca..."
-          value={query}
           onChange={handleInputChange}
+          value={cat}
           className="search-input"
         />
-        <button onClick={handleSearch} className="search-button">
-          Buscar
-        </button>
       </div>
     );
   }

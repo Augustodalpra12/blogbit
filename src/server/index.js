@@ -1,5 +1,6 @@
 const cfg = require('./config')
 const postgres = require('postgres')
+const fs = require('fs')
 
 const express = require('express')
 const multer  = require('multer')
@@ -18,9 +19,16 @@ if(database_functions === null){
 database_functions.create_table()
 
 const read_handler = require('./handlers/read')(database_functions);
+app.get('/api/posts', (req, res) => {
+    read_handler.handle(null, null).then((result) => {
+        res.send(result)  
+    })
+})
+
+//aqui as categories nao sao exatas, se contem, aparece
 app.get('/api/posts/:category', (req, res) => {
     read_handler.handle(null, 
-        (req.params.category === 'undefined' ? null: req.params.category)
+        (req.params.category === 'undefined' ? null : req.params.category)
     ).then((result) => {
         res.send(result)  
     })
@@ -34,6 +42,18 @@ app.get('/api/post/:id', (req, res) => {
     })
 })
 
+let upload_path = path.join(__dirname, 'uploads')
+
+const delete_handler = require('./handlers/delete')(database_functions, fs, upload_path);
+app.get('/api/post/:id/delete', (req, res) => {
+    let id = req.params.id
+
+    delete_handler.handle(id).then((result) => {
+        res.send(result)
+    })
+})
+
+
 app.get('/api/categories', (req, res) => {
     read_handler.handle_list_categories().then((result) => {
         res.send(result)
@@ -41,8 +61,6 @@ app.get('/api/categories', (req, res) => {
 })
 
 const create_handler = require('./handlers/create')(database_functions);
-
-let upload_path = path.join(__dirname, 'uploads')
 
 const multer_cfg = multer({
     storage: multer.diskStorage({
@@ -85,7 +103,7 @@ app.post('/api/new-post', multer_cfg.single('file'), (req, res) => {
 
     let pre_url = 'http://localhost:3001/uploads/'
 
-    create_handler.handle(req.body.name, req.body.content, pre_url + req.file.filename).then((result) => {
+    create_handler.handle(req.body.name, req.body.content, req.body.category, pre_url + req.file.filename).then((result) => {
         let append = (result !== create_handler.error_enum.success) ? '?err=post_already_exists' : '';
 
         return res.writeHead(301, {

@@ -1,18 +1,22 @@
 import "./post.css"
 
-export default function Post() {
+export default function Post(props) {
   return (
     <div className="post">
-      <img className="postImg" src="https://cdn.pixabay.com/photo/2016/11/23/14/45/coding-1853305_640.jpg" alt="" />
+      <img className="postImg" src={props.image} alt="" />
       <div className="postInfo">
         <div className="postCategories">
-        <span className="postCategories">Web</span>
+          <span className="postCategories" onClick={() => {
+              window.location.href=`/categorias/${props.category}`
+          }}>{props.category}</span>
         </div>
-        <span className="postTitle">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+        <span className="postTitle" onClick={() => {
+            window.location.href =  (props.admin ? '/admin' : '') + `/post/${props.id}`
+        }}>{props.name}</span>
         <hr></hr>
-        <span className="postDate">1 hora atras</span>
+        <span className="postDate">{new Date(props.date).toLocaleString()}</span>
       </div>
-      <p className="postDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, hic! Porro sed ullam expedita a, sint et excepturi quasi sit distinctio, provident corporis autem vitae odit praesentium eos voluptatem nam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, hic! Porro sed ullam expedita a, sint et excepturi quasi sit distinctio, provident corporis autem vitae odit praesentium eos voluptatem nam.</p>
+      <p className="postDescription">{props.content.substring(0, 25)}...</p>
     </div>
     
 

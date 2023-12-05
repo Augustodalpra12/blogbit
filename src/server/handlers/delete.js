@@ -1,29 +1,32 @@
-module.exports = (db_funcs, fs) => {
+module.exports = (db_funcs, fs, dir) => {
     return {
         error_enum: {
             success: 'success',
-            file_not_found: 'file not found',
-            delete_failure: 'failure to delete file'
+            post_not_found: 'post not found',
+            image_delete_failure: 'couldnt delete post image',
+            delete_failure: 'couldnt delete post'
         },
 
-        handle: async function(file_id){
+        handle: async function(post_id){
             let error_enum = this.error_enum
 
-            let file = await db_funcs.fetch_file(file_id)
+            let post_data = await db_funcs.fetch_post(post_id)
 
-            if(file === null){
-                return error_enum.file_not_found 
+            if(post_data === null){
+                return error_enum.post_not_found
             }
 
-            fs.unlink(file.location, (err) => {
+            let file_name = post_data.image.split('/').pop()
+
+            console.log(dir + file_name)
+
+            fs.unlink(`${dir}/${file_name}`, (err) => {
                 if(err){
-                    return error_enum.delete_failure
+                    return error_enum.image_delete_failure
                 }
             })
 
-            await db_funcs.delete_file(file_id)
-
-            return error_enum.success
+            return (await db_funcs.delete_post(post_id)) ? error_enum.success : error_enum.delete_failure
         }
     }
 }

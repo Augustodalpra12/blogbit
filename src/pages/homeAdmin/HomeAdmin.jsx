@@ -11,7 +11,7 @@ export default function HomeAdmin() {
     <NavBarAdmin/>
     <Header/>
     <div className="homeAdmin">
-      <Posts/>
+      <Posts admin={true}/>
       <Sidebar/>
     </div>
     </>

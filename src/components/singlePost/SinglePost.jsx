@@ -1,21 +1,52 @@
 import NavBar from "../navbar/NavBar"
 import "./singlePost.css"
 
-export default function SinglePost() {
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+
+
+export default function SinglePost(props) {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+      fetch(`/api/post/${props.id}`)
+      .then(res => res.json())
+      .then(data => setPost(data))
+  })
+
   return (
     <>
     <div className="singlePost">
     <NavBar/>
       <div className="singlePostWrapper">
-        <img className="singlePostImage" src="https://cdn.pixabay.com/photo/2016/11/23/14/45/coding-1853305_640.jpg" alt="" />
-        <h1 className="singlePostTitle">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit!
+        <img className="singlePostImage" src={post.image} alt="" />
+        <h1 className="singlePostTitle">{post.name}
+            {props.admin 
+              ? 
+              <div className="singlePostEdit">
+              <Link className="link" to={`/admin/edit-post/${props.id}`}>
+              <i className="singlePostIconEdit fa-solid fa-pen-to-square"></i>
+              </Link>
+
+                <i className="singlePostIconDelete fa-solid fa-trash" onClick={() => {
+                    fetch(`/api/post/${props.id}/delete`)
+                    .then(res => res.text())
+                    .then(data => {
+                        window.location.href = `/admin/?err=${data}`
+                    })
+                }}></i>
+
+
+              </div> 
+              : 
+              ''
+            }
         </h1>
         <div className="singlePostInfo">
-            <span className="singlePostCriador">Categoria: <b>Nome</b></span>
-            <span className="singlePostDate">1 hora atras</span>
+            <span className="singlePostCriador">Categoria: <b>{post.category}</b></span>
+            <span className="singlePostDate">{new Date(post.date).toLocaleString()}</span>
         </div>
-        <p className="singlePostDescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis iure quae placeat, velit et corrupti eius porro dolores neque distinctio perferendis ab. Eum, velit accusantium! Magni debitis quasi asperiores quam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis iure quae placeat, velit et corrupti eius porro dolores neque distinctio perferendis ab. Eum, velit accusantium! Magni debitis quasi asperiores quam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis iure quae placeat, velit et corrupti eius porro dolores neque distinctio perferendis ab. Eum, velit accusantium! Magni debitis quasi asperiores quam.</p>
+        <p className="singlePostDescription">{post.content}</p>
       </div>
     </div>
     </>

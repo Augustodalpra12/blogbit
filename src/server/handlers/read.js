@@ -23,7 +23,7 @@ module.exports = (db_funcs) => {
             }
 
             if(category_id !== null){
-                return await db_funcs.fetch_all_posts_with_category(category_id)
+                return await db_funcs.fetch_all_posts_with_category_like(category_id)
             }
 
             return []
