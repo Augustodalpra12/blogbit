@@ -8,3 +8,14 @@
 .categories{
     display: flex;
 }
+
+
+@media screen and (max-width: 768px) {
+    .categories {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+    flex: 0 0 100%;
+    }
+  }

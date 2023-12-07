@@ -24,11 +24,13 @@ export default function NewPost() {
             <input type="file" name="file" id="fileInput" style={{display:"none"}} onChange={fchange}/>
             <input type="text" name="name" placeholder="Titulo" className="newPostInput" autoFocus={true}/>
             <input type="text" name="category" placeholder="Categoria" className="newPostInput"/>
+            
           </div>
           <div className="newPostFormGroup">
             <textarea placeholder="Escreva aqui!" name="content" typeof="text" className="newPostInput newPostText"></textarea>
+            <button className="newPostSubmit">Publique</button>
           </div>
-          <button className="newPostSubmit">Publique</button>
+          
         </form>
         
       </div>

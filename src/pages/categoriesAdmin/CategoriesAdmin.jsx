@@ -5,6 +5,7 @@ import SearchBar from "../../components/searchbar/SearchBar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import "./categoriesAdmin.css"
 
+import { useParams } from "react-router"
 
 export default function CategoriesAdmin() {
   return (
@@ -16,7 +17,7 @@ export default function CategoriesAdmin() {
         <SearchBar></SearchBar>
         </div>
         <div className="categories">
-        <Posts></Posts>
+        <Posts {...useParams()} ></Posts>
         <Sidebar></Sidebar>
         </div>
         

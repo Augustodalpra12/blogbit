@@ -1,4 +1,18 @@
 .homeAdmin{
-    display:flex;
-     
-}
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .sidebar {
+    flex: 0 0 30%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .home {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+    flex: 0 0 100%;
+    }
+  }

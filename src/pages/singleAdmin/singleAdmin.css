@@ -1,3 +1,13 @@
 .singleAdmin{
     display: flex;
 }
+
+@media screen and (max-width: 768px) {
+    .singleAdmin {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+    flex: 0 0 100%;
+    }
+  }

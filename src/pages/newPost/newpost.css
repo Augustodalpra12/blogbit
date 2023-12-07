@@ -71,3 +71,54 @@
     border-radius: 10px;
     object-fit: cover;
 }
+
+.newPostFormGroup{
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 560px){
+    .newPostSubmit{
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        color: #e5d9c6;
+        background-color: blue;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor:pointer;
+        font-size: 16px;
+    }
+    .newPostImage{
+        margin-left: 50px;
+        width: 70vw;
+        height: 250px;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+}
+
+
+@media screen and (max-width: 841px) {
+    .newPostFormGroup {
+      margin-bottom: 15px;
+      flex-direction: column;
+    }
+  
+    .newPostForm{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .newPostSubmit{
+        position: absolute;
+        top: 20px;
+        color: #e5d9c6;
+        background-color: blue;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor:pointer;
+        font-size: 16px;
+    }
+  }

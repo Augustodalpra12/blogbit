@@ -15,18 +15,13 @@ export default function Categories() {
         <NavBar/>
         <Header/>
         <div className="searchBar"> 
-        <SearchBar></SearchBar>
+          <SearchBar></SearchBar>
         </div>
         <div className="categories">
-        <Posts {...useParams()} ></Posts>
-        <Sidebar></Sidebar>
+          <Posts {...useParams()} ></Posts>
+          <Sidebar></Sidebar>
         </div>
-        
-
-
         </>
-
-      
     </div>
   )
 }

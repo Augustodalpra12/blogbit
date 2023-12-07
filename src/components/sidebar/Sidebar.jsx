@@ -14,7 +14,7 @@ export default function Sidebar() {
     <div className="sidebar">
         <div className="sidebarItem">
         <span className="sidebarTitle">Sobre a Empresa</span>
-        <p className="sidebarP">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id, consequatur recusandae. Aperiam recusandae numquam distinctio! Temporibus provident quos vitae. Corporis et aliquam quidem numquam placeat molestiae impedit provident nemo? Veritatis.</p>
+        <p className="sidebarP">Somos uma pequena empresa júnior localizada na UNIOESTE de Cascavel (PR). Todos participantes da empresa são alunos do curso de ciência da computação, e contando com  o auxílio de um de nossos professores, o objetivo da BIT é o desenvolvimento de sistemas que satisfaçam todas as vontades do cliente e dê aos nossos desenvolvedores experiência no mercado de trabalho.</p>
         </div>
         <div className="sidebarItem">
         <span className="sidebarTitle">Categorias</span>
