@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-hot-toast';
 import "./home.css";
 import Header from "../../components/header/Header";
 import Posts from "../../components/posts/Posts";
@@ -21,15 +20,7 @@ export default function Home() {
       const erro = getQueryParam('err');
 
       if (erro) {
-        toast.error(`Erro detectado: ${erro}`, {
-          position: 'top-center',
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(`Erro detectado: ${erro}`);
       }
     };
 
@@ -44,7 +35,6 @@ export default function Home() {
         <Posts/>
         <Sidebar className="sidebar" />
       </div>
-      <ToastContainer />
     </>
   );
 }
