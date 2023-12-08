@@ -89,22 +89,8 @@ const multer_cfg = multer({
 app.use('/uploads', express.static(upload_path))
 
 app.post('/api/new-post', multer_cfg.single('file'), (req, res) => {
-    if(req.body.name === undefined || req.body.content === undefined){
-        return res.writeHead(301, {
-            Location: '/?err=bad_request'
-        }).end()
-    }
-
-    if(req.file === undefined){
-        return res.writeHead(301, {
-            Location: '/?err=bad_file'
-        }).end()
-    }
-
-    let pre_url = 'http://localhost:3001/uploads/'
-
-    create_handler.handle(req.body.name, req.body.content, req.body.category, pre_url + req.file.filename).then((result) => {
-        let append = (result !== create_handler.error_enum.success) ? '?err=post_already_exists' : '';
+    create_handler.handle(req.body.name, req.body.content, req.body.category, req.file).then((result) => {
+        let append = (result !== create_handler.error_enum.success) ? `?err=${result}` : '';
 
         return res.writeHead(301, {
             Location: `/${append}`

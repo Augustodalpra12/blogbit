@@ -21,8 +21,8 @@ export default function SinglePost(props) {
       <div className="singlePostWrapper">
         <img className="singlePostImage" src={post.image} alt="" />
         <h1 className="singlePostTitle">{post.name}
-            {props.admin 
-              ? 
+            {
+              props.admin ? 
               <div className="singlePostEdit">
               <Link className="link" to={`/admin/edit-post/${props.id}`}>
               <i className="singlePostIconEdit fa-solid fa-pen-to-square"></i>

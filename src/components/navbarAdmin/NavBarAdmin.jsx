@@ -12,7 +12,7 @@ export default function NavBarAdmin() {
             <img className="bitImage" src={process.env.PUBLIC_URL + '/assets/bitmini.jpg'} alt="Logo" />
             </Link>
             </li>
-            <Link className="link" to="/categorias">
+            <Link className="link" to="/categorias/">
             <li className="navItem">CATEGORIAS</li>
             </Link>
             <li className="navItem">

@@ -18,8 +18,6 @@ module.exports = (db_funcs, fs, dir) => {
 
             let file_name = post_data.image.split('/').pop()
 
-            console.log(dir + file_name)
-
             fs.unlink(`${dir}/${file_name}`, (err) => {
                 if(err){
                     return error_enum.image_delete_failure
