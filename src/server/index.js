@@ -36,7 +36,7 @@ app.get('/api/posts/:category', (req, res) => {
 
 app.get('/api/post/:id', (req, res) => {
     let id = req.params.id
-    
+
     read_handler.handle(id).then((result) => {
         res.send(result)  
     })
