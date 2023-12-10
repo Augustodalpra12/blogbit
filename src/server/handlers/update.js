@@ -35,15 +35,15 @@ module.exports = (db_funcs, pre_url, fs, dir) => {
 
             if(image !== undefined){
                 data.image = pre_url + image.filename
+
+                let file_name = post_data1['image'].split('/').pop()
+
+                fs.unlink(`${dir}/${file_name}`, (err) => {
+                    if(err){
+                        return error_enum.image_delete_failure
+                    }
+                })
             }
-
-            let file_name = post_data1['image'].split('/').pop()
-
-            fs.unlink(`${dir}/${file_name}`, (err) => {
-                if(err){
-                    return error_enum.image_delete_failure
-                }
-            })
 
             db_funcs.update_post_with_id(post_id, data)
 
