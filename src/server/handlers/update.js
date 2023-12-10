@@ -1,40 +1,54 @@
-module.exports = (db_funcs, fs, utils) => {
+module.exports = (db_funcs, pre_url, fs, dir) => {
     return {
         error_enum: {
             success: 'success',
-            file_not_found: 'file not found',
-            file_upload_failure: 'failure to upload file'
+            post_doesnt_exist: 'post doesnt exist',
+            title_cant_be_empty: 'title cant be empty',
+            post_with_title_already_exists: 'post with this title already exists',
+            image_delete_failure: 'failure deleting old image'
         },
 
-        handle: async function(file_id, new_file){
+        handle: async function(post_id, name, content, category, image){
             let error_enum = this.error_enum
 
-            let file = await db_funcs.fetch_file(file_id) 
+            let post_data1 = await db_funcs.fetch_post(post_id)
 
-            if(file === null){
-                return error_enum.file_not_found 
+            if(post_data1 === null){
+                return error_enum.post_doesnt_exist
             }
 
-            const ws = fs.createWriteStream(file.location)
+            if(name.length <= 0){
+                return error_enum.title_cant_be_empty
+            }
 
-            let buf = new_file.buffer
+            let post_data2 = await db_funcs.fetch_post_with_name(name);
 
-            let hash = utils.get_md5(buf)
+            if(post_data2 !== null && post_data1['name'] !== post_data2['name']){
+                return error_enum.post_with_title_already_exists 
+            }
 
-            await db_funcs.update_file(file_id, file.location, new_file.originalname, hash, new_file.mimetype)
+            let data = {
+                name: name,
+                content: content,
+                category: category
+            }
 
-            ws.on('error', (err) => {
-                return error_enum.file_upload_failure
+            if(image !== undefined){
+                data.image = pre_url + image.filename
+            }
+
+            let file_name = post_data1['image'].split('/').pop()
+
+            fs.unlink(`${dir}/${file_name}`, (err) => {
+                if(err){
+                    return error_enum.image_delete_failure
+                }
             })
 
-            ws.write(buf); 
-
-            ws.end();    
+            db_funcs.update_post_with_id(post_id, data)
 
             return error_enum.success
         }
     }
 }
-
-
 

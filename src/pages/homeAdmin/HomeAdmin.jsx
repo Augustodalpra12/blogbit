@@ -10,22 +10,16 @@ import NavBarAdmin from "../../components/navbarAdmin/NavBarAdmin";
 export default function HomeAdmin() {
   const location = useLocation();
 
-  useEffect(() => {
-    const getQueryParam = (name) => {
+  const getQueryParam = (name) => {
       const urlParams = new URLSearchParams(location.search);
       return urlParams.get(name);
-    };
+  };
 
-    const exibirToastSeErro = () => {
-      const erro = getQueryParam('err');
+  const erro = getQueryParam('err');
 
-      if (erro) {
-        toast.error(`Erro detectado: ${erro}`);
-      }
-    };
-
-    exibirToastSeErro();
-  }, [location.search]);
+  if (erro) {
+    toast.error(`Erro detectado: ${erro}`);
+  }
 
   return (
     <>

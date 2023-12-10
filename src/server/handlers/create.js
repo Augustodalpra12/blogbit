@@ -1,4 +1,4 @@
-module.exports = (db_funcs) => {
+module.exports = (db_funcs, pre_url) => {
     return {
         error_enum: {
             success: 'success',
@@ -19,15 +19,15 @@ module.exports = (db_funcs) => {
                 return error_enum.bad_request 
             }
 
-            /*if(db_funcs.fetch_post_with_name(name) !== null){
+            let post_data = await db_funcs.fetch_post_with_name(name)
+
+            if(post_data !== null){
                 return error_enum.post_already_exists
-            }*/
+            }
 
             if(name.length <= 0 || category.length <= 0){
                 return error_enum.empty_details
             }
-
-            let pre_url = 'http://localhost:3001/uploads/'
 
             db_funcs.insert_post({
                 name: name,

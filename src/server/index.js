@@ -53,14 +53,11 @@ app.get('/api/post/:id/delete', (req, res) => {
     })
 })
 
-
 app.get('/api/categories', (req, res) => {
     read_handler.handle_list_categories().then((result) => {
         res.send(result)
     })
 })
-
-const create_handler = require('./handlers/create')(database_functions);
 
 const multer_cfg = multer({
     storage: multer.diskStorage({
@@ -86,15 +83,27 @@ const multer_cfg = multer({
     }
 })
 
+const pre_url = 'http://localhost:3001/uploads/'
+
 app.use('/uploads', express.static(upload_path))
 
+const create_handler = require('./handlers/create')(database_functions, pre_url);
 app.post('/api/new-post', multer_cfg.single('file'), (req, res) => {
     create_handler.handle(req.body.name, req.body.content, req.body.category, req.file).then((result) => {
         let append = (result !== create_handler.error_enum.success) ? `?err=${result}` : '';
 
-        return res.writeHead(301, {
-            Location: `/${append}`
-        }).end()
+        return res.redirect(`/${append}`)
+    })
+})
+
+const update_handler = require('./handlers/update')(database_functions, pre_url, fs, upload_path);
+app.post('/api/post/:id/update', multer_cfg.single('file'), (req, res) => {
+    let id = req.params.id
+
+    update_handler.handle(id, req.body.name, req.body.content, req.body.category, req.file).then((result) => {
+        let append = (result !== update_handler.error_enum.success) ? `?err=${result}` : '';
+
+        return res.redirect(`/${append}`)
     })
 })
 

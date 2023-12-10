@@ -27,30 +27,30 @@ export default function NewEditPost() {
       .then(data => setPostData(data))
   }, [is_edit, postId])
 
-  let image_element
+  let image_data
 
-  if(is_edit && file){
-      image_element = <img className="newPostImage" src={URL.createObjectURL(file)} alt="" />
+  if(file) {
+      image_data = URL.createObjectURL(file)
   } else if(is_edit){
-      image_element = <img className="newPostImage" src={postData && postData.image} alt="" />
-  } else{
-      image_element = <img className="newPostImage" alt="" />
+      image_data = postData && postData.image
+  } else {
+      image_data = ''
   }
 
   return (
     <><NavBarAdmin/>
       <div className="newPost">
-        {image_element}
-        <form className="newPostForm" method="post" action={is_edit ? `/api/edit-post/${postId}` : '/api/new-post'} enctype="multipart/form-data">
+        <img className="newPostImage" src={image_data} alt="" />
+
+        <form className="newPostForm" method="post" action={is_edit ? `/api/post/${postId}/update` : '/api/new-post'} encType="multipart/form-data">
           <div className="newPostFormGroup">
             <label htmlFor="fileInput">
-            <i class="fileInputButton fa-solid fa-plus"></i>
+            <i className="fileInputButton fa-solid fa-plus"></i>
             </label>
 
             <input type="file" name="file" id="fileInput" style={{display:"none"}} onChange={fchange}/>
-
-            <input type="text" name="name" placeholder="Titulo" className="newPostInput" autoFocus={true} value={(is_edit && postData) ? postData.name : ''}/>
-            <input type="text" name="category" placeholder="Categoria" className="newPostInput" value={(is_edit && postData) ? postData.category : '' }/>
+            <input type="text" name="name" placeholder="Titulo" className="newPostInput" autoFocus={true} defaultValue={(is_edit && postData) ? postData.name : ''}/>
+            <input type="text" name="category" placeholder="Categoria" className="newPostInput" defaultValue={(is_edit && postData) ? postData.category : '' }/>
             
           </div>
           <div className="newPostFormGroup">
