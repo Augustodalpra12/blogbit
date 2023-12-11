@@ -42,7 +42,9 @@
 
 .sidebarListItem{
     background-color:  #1c1c1c;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
     margin-top: 15px;
     cursor: pointer;    

@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./home.css";
 import Header from "../../components/header/Header";
 import Posts from "../../components/posts/Posts";
@@ -9,17 +10,34 @@ import NavBar from "../../components/navbar/NavBar";
 
 export default function Home() {
   const location = useLocation();
+  const toastDisplayed = useRef(false);
 
-  const getQueryParam = (name) => {
+  useEffect(() => {
+    const getQueryParam = (name) => {
       const urlParams = new URLSearchParams(location.search);
       return urlParams.get(name);
-  };
+    };
 
-  const erro = getQueryParam('err');
+    const exibirToastSeErro = () => {
+      const erro = getQueryParam('err');
 
-  if (erro) {
-      toast.error(`Erro detectado: ${erro}`);
-    }
+      if (erro && !toastDisplayed.current) {
+        toast.error(`Erro detectado: ${erro}`, {
+          position: 'top-center',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        toastDisplayed.current = true;
+      }
+    };
+
+    exibirToastSeErro();
+  }, [location.search]);
 
   return (
     <>
@@ -27,8 +45,9 @@ export default function Home() {
       <Header/>
       <div className="home">
         <Posts/>
-        <Sidebar className="sidebar" />
+        <Sidebar/>
       </div>
+      <ToastContainer />
     </>
   );
 }
