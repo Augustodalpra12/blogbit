@@ -1,0 +1,56 @@
+POST = {
+    id: INT,
+    name: STRING,
+    content: STRING,
+    category: STRING
+    image: STRING,
+    date: INT
+}
+
+Lista de rotas:
+
+get /api/posts/ => POST[]
+
+-- retorna uma lista de posts
+
+get /api/posts/:category => POST[]
+
+-- retorna uma lista de posts onde a categoria passada esta contida na categoria da db
+
+get /api/post/:id => POST | STRING
+
+id: INT
+
+-- retorna um post ou uma string da mensagem de erro
+
+get /api/post/:id/delete => STRING
+
+id: INT
+
+-- deleta um post, retorna uma string contendo sucesso ou mensagem de erro 
+
+post /api/post/:id/update => ()
+
+-- GET
+id: INT
+
+-- POST
+name: STRING
+content: STRING
+category: STRING
+file: BYTE[]
+
+-- atualiza um post e te redireciona pra pagina principal com o GET err setado caso um erro tenha acontecido
+
+post /api/new-post => ()
+
+name: STRING
+content: STRING
+category: STRING
+file: BYTE[]
+
+-- cria um novo post e te redireciona pra pagina principal com o GET err setado caso um erro tenha acontecido
+
+get /api/categories => STRING[]
+
+-- retorna uma array de strings contendo todas as categorias disponiveis 
